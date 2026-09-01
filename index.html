@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academia de Futebol de Elite | Transforme seu Talento</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
+
+        /* Variáveis :root e Reset */
+        :root {
+            --primary: #00FF55;
+            --dark: #0a0a0a;
+            --dark-gray: #1a1a1a;
+            --light: #f4f4f4;
+            --text: #333;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+            color: var(--text);
+            transition: font-size 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Blindagem do Modo de Contraste - REGRA OBRIGATÓRIA */
+        body.high-contrast, body.high-contrast *:not(i):not(.icon) {
+            background-color: #000 !important;
+            color: #fff !important;
+            border: 1px solid #ff0 !important;
+            background-image: none !important;
+            box-shadow: none !important;
+            text-shadow: none !important;
+        }
+        
+        body.high-contrast a, body.high-contrast button {
+            color: #ff0 !important;
+            text-decoration: underline !important;
+            font-weight: bold !important;
+        }
+
+        /* Acessibilidade Bar */
+        .a11y-bar {
+            background-color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .a11y-btn {
+            background: transparent;
+            border: 1px solid var(--text);
+            padding: 5px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+        }
+
+        /* Layout & Responsividade Fluidos */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: clamp(1.5rem, 3vw, 3rem);
+            margin: 40px 0;
+        }
+
+        /* Hero Section (Clean & Bold) */
+        .hero {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: clamp(4rem, 10vw, 8rem) 20px;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            margin: 0 0 20px 0;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            color: #ccc;
+        }
+
+        /* Componentes / Botões */
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--dark);
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 255, 85, 0.2);
+        }
+
+        /* Seção Benefícios e Depoimentos */
+        section {
+            padding: clamp(3rem, 6vw, 6rem) 0;
+        }
+
+        h2.section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        /* Acordeão (FAQ) */
+        .accordion-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            width: 100%;
+            text-align: left;
+            padding: 25px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .accordion-content {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .accordion-content p {
+            margin: 0;
+            padding-bottom: 25px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="a11y-bar">
+        <button id="btn-decrease" class="a11y-btn">A-</button>
+        <button id="btn-increase" class="a11y-btn">A+</button>
+        <button id="btn-contrast" class="a11y-btn">Alto Contraste</button>
+    </div>
+
+    <header class="hero">
+        <div class="container">
+            <h1>O Seu Passaporte Para o Futebol Europeu</h1>
+            <p>Metodologia de ponta, treinadores experientes e estrutura de nível mundial. As últimas 5 vagas para a seletiva deste mês estão abertas. Mostre seu talento onde os olheiros realmente assistem.</p>
+            <button class="btn-primary">Quero Garantir Minha Vaga</button>
+        </div>
+    </header>
+
+    <section class="container">
+        <h2 class="section-title">Nossos Atletas Aprovados</h2>
+        <div id="carousel-container" class="grid-3">
+            </div>
+    </section>
+
+    <section class="container">
+        <h2 class="section-title">Perguntas Frequentes</h2>
+        <div id="accordion-container" class="accordion-container">
+            </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <h2>Pronto para jogar no mais alto nível?</h2>
+            <p>Não deixe seu talento escondido.</p>
+            <br>
+            <button class="btn-primary">Inscrever-se na Seletiva</button>
+            <p style="margin-top: 40px; font-size: 0.9rem; color: #888;">© 2026 Academia de Futebol de Elite. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Acessibilidade (Controle de Fonte)
+        let fontSizeBase = 16;
+        
+        function changeFontSize(step) {
+            let novaFonte = fontSizeBase + step;
+            // Validação de limite imposta pelo requisito
+            if (novaFonte >= 12 && novaFonte <= 24) {
+                fontSizeBase = novaFonte;
+                document.documentElement.style.fontSize = fontSizeBase + 'px';
+            }
+        }
+
+        document.getElementById('btn-increase').addEventListener('click', () => changeFontSize(2));
+        document.getElementById('btn-decrease').addEventListener('click', () => changeFontSize(-2));
+
+        // 2. Acessibilidade (Alto Contraste)
+        document.getElementById('btn-contrast').addEventListener('click', () => {
+            document.body.classList.toggle('high-contrast');
+        });
+
+        // 3. Array de Objetos: Depoimentos (Carrossel/Grid)
+        const testimonials = [
+            {
+                name: "Lucas V.",
+                role: "Atacante - Sub-20 (Portugal)",
+                text: "A intensidade tática que aprendi aqui foi o diferencial para eu passar na peneira do clube em Portugal. Estrutura impecável."
+            },
+            {
+                name: "Pedro M.",
+                role: "Meio-Campo - Profissional (Brasil)",
+                text: "Treinadores que viveram o futebol respiram excelência. Em 6 meses, minha visão de jogo e preparo físico dobraram."
+            },
+            {
+                name: "Gabriel S.",
+                role: "Zagueiro - Sub-17 (Itália)",
+                text: "Fui visto por um olheiro durante o amistoso internacional organizado pela academia. A melhor decisão da minha carreira."
+            }
+        ];
+
+        const carouselContainer = document.getElementById('carousel-container');
+        if (carouselContainer) {
+            testimonials.forEach(t => {
+                carouselContainer.innerHTML += `
+                    <div class="card">
+                        <h3>${t.name}</h3>
+                        <p><i>"${t.text}"</i></p>
+                        <p style="color: var(--primary); font-weight: 600; margin-top: 15px;">${t.role}</p>
+                    </div>
+                `;
+            });
+        }
+
+        // 4. Array de Objetos: FAQ (Acordeão)
+        const faqs = [
+            {
+                q: "Qual é a idade limite para as seletivas?",
+                a: "Trabalhamos com atletas focados no alto rendimento entre 14 e 21 anos. O nivelamento é feito na primeira semana de treinos."
+            },
+            {
+                q: "A academia garante contrato com clubes?",
+                a: "Garantimos a exposição constante a olheiros credenciados (CBF, UEFA) e o desenvolvimento técnico de excelência. O contrato depende do seu desempenho em campo."
+            },
+            {
+                q: "Onde ficam as instalações?",
+                a: "Nossa base de treinamentos conta com gramados padrão FIFA e academia de alto rendimento. Após a inscrição, enviaremos o dossiê completo de localização."
+            }
+        ];
+
+        const accordionContainer = document.getElementById('accordion-container');
+        if (accordionContainer) {
+            faqs.forEach((faq, index) => {
+                accordionContainer.innerHTML += `
+                    <div class="accordion-item">
+                        <button class="accordion-header" onclick="toggleAccordion(${index})">${faq.q}</button>
+                        <div class="accordion-content" id="content-${index}">
+                            <p>${faq.a}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Lógica de abertura do Acordeão
+        window.toggleAccordion = function(index) {
+            const content = document.getElementById(`content-${index}`);
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                // Fecha todos os outros primeiro (opcional, mas bom UX)
+                document.querySelectorAll('.accordion-content').forEach(el => el.style.maxHeight = null);
+                content.style.maxHeight = content.scrollHeight + 50 + "px"; // 50px de margem de segurança
+            }
+        };
+    </script>
+</body>
+</html>
